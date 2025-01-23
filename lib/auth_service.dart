@@ -1,5 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'user_provider.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -27,7 +31,8 @@ class AuthService {
   }
 
   // Sign up with email, password, and username
- Future<void> signUp(String email, String password, String username) async {
+  
+ Future<void> signUp(String email, String password, String username, String phone) async {
   try {
     // Create user with email and password
     UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -41,6 +46,7 @@ class AuthService {
       await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
         'username': username,
         'email': email,
+        'phone': phone, // Store phone number
         'cart': [],  // Initialize cart and wishlist
         'wishlist': [],
       });
@@ -50,7 +56,40 @@ class AuthService {
     throw Exception('Error during sign-up: ${e.toString()}');
   }
 }
+ Future<void> updateUserProfile({
+  required BuildContext context,
+  required String fullName,
+  required String email,
+  required String phone,
+  String? password,
+}) async {
+  final user = FirebaseAuth.instance.currentUser;
 
+  if (user != null) {
+    // Update Firestore user document
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+      'username': fullName,
+      'email': email,
+      'phone': phone,
+    });
+
+    // Update Authentication profile
+    if (user.email != email) {
+      // ignore: deprecated_member_use
+      await user.updateEmail(email);
+    }
+    if (password != null && password.isNotEmpty) {
+      await user.updatePassword(password);
+    }
+    final userProvider= Provider.of<UserProvider>(context, listen: false);
+    userProvider.updateEmail(email);
+    userProvider.updateUsername(fullName);  
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Profile updated successfully!')),
+    );
+    
+  }
+}
 
   // Get the user profile from Firestore
   Future<Map<String, dynamic>?> getUserProfile(String uid) async {

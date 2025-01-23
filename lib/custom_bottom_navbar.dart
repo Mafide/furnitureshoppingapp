@@ -13,7 +13,7 @@ class CustomBottomNavBar extends StatefulWidget {
 }
 
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-  int _selectedIndex = 0; // Tracks the selected index
+  int _selectedIndex = 0; 
 
   void _onItemTapped(int index) {
     setState(() {
@@ -66,9 +66,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: _selectedIndex, // Set the current selected index
-      selectedItemColor: Colors.teal, // Color for selected icon
-      unselectedItemColor: Colors.grey, // Color for unselected icons
+      currentIndex: _selectedIndex, 
+      selectedItemColor: Colors.teal, 
+      unselectedItemColor: Colors.grey, 
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -91,7 +91,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           label: "Profile",
         ),
       ],
-      onTap: _onItemTapped, // Update the selected index when an item is tapped
+      onTap: _onItemTapped, 
     );
   }
 }

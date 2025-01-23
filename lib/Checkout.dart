@@ -79,7 +79,7 @@ class Checkout extends StatelessWidget {
                     minimumSize: Size(double.infinity, 50),
                   ),
                   onPressed: () {
-                    // Pass total price and cartItems to the PaymentPage
+                    
                     Navigator.push(
                       context,
                       MaterialPageRoute(

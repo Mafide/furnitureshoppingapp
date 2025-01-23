@@ -10,15 +10,15 @@ class ThemeProvider with ChangeNotifier {
   ThemeData get lightTheme => ThemeData(
         primarySwatch: Colors.teal,
         appBarTheme: AppBarTheme(
-          backgroundColor: Color(0xFFD3D3D3), // Light mode app bar background color
-          foregroundColor: Colors.black,     // Text/icon color for light mode
-          titleTextStyle: TextStyle(         // Explicit text style for the title
+          backgroundColor: Color(0xFFD3D3D3), 
+          foregroundColor: Colors.black,    
+          titleTextStyle: TextStyle(         
             color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
           iconTheme: IconThemeData(
-            color: Colors.black,             // Icon color for light mode
+            color: Colors.black,             
           ),
         ),
       );
@@ -26,21 +26,21 @@ class ThemeProvider with ChangeNotifier {
   ThemeData get darkTheme => ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.teal,
-        scaffoldBackgroundColor: Color(0xFF121212), // Dark mode background color
+        scaffoldBackgroundColor: Color(0xFF121212),
         appBarTheme: AppBarTheme(
-          backgroundColor: Color(0xFF212121), // Dark mode app bar background color
-          foregroundColor: Colors.black,     // Override default white text color
+          backgroundColor: Color(0xFF212121), 
+          foregroundColor: Colors.black,    
           titleTextStyle: TextStyle(
-            color: Colors.black,             // Explicitly set the title text color
+            color: Colors.black,            
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
           iconTheme: IconThemeData(
-            color: Colors.black,             // Icon color for dark mode
+            color: Colors.black,             
           ),
         ),
         textTheme: TextTheme(
-          titleLarge: TextStyle(color: Colors.black), // App bar text uses headline6
+          titleLarge: TextStyle(color: Colors.black), 
         ),
       );
 

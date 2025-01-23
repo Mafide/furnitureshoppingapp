@@ -9,6 +9,7 @@ class CreateAccountPage extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _signupFormKey = GlobalKey<FormState>();
 
   CreateAccountPage({super.key});
@@ -20,8 +21,9 @@ class CreateAccountPage extends StatelessWidget {
         final username = _usernameController.text.trim();
         final email = _emailController.text.trim();
         final password = _passwordController.text;
+        final phone = _phoneController.text.trim();
 
-        await authService.signUp(email, password, username);
+        await authService.signUp(email, password, username, phone);
 
         // Set the user data in the UserProvider after successful sign-up
         Provider.of<UserProvider>(context, listen: false).setUser(username, email);
@@ -88,6 +90,23 @@ class CreateAccountPage extends StatelessWidget {
                   validator: (value) {
                     if (value == null || value.isEmpty || !value.contains('@')) {
                       return 'Enter a valid email';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _phoneController,
+                  decoration: const InputDecoration(
+                    labelText: 'Phone Number',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.phone,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Enter your phone number';
+                    } else if (!RegExp(r'^\d{10,15}$').hasMatch(value)) {
+                      return 'Enter a valid phone number (10-15 digits)';
                     }
                     return null;
                   },

@@ -10,7 +10,7 @@ class OrderHistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final userId = authService.currentUser?.uid ?? ''; // Get the current user ID
+    final userId = authService.currentUser?.uid ?? ''; 
 
     return Scaffold(
       appBar: AppBar(
@@ -36,20 +36,20 @@ class OrderHistoryPage extends StatelessWidget {
             itemCount: orders.length,
             itemBuilder: (context, index) {
               final order = orders[index];
-              final items = List.from(order['items']); // Fetching items only
-              final totalPrice = order['totalPrice'] ?? 0.0; // Get the total price
+              final items = List.from(order['items']);
+              final totalPrice = order['totalPrice'] ?? 0.0; 
               final totalQuantity = items.fold<int>(0, (sum, item) => sum + (item['quantity'] ?? 0) as int);
 
               return Card(
                 child: ListTile(
-                  title: Text('Order on ${order['orderDate'].toDate()}'), // Display order date instead of ID
+                  title: Text('Order on ${order['orderDate'].toDate()}'), 
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ...items.map((item) => Text("- ${item['name']} (x${item['quantity']})")), // Display items with quantity
+                      ...items.map((item) => Text("- ${item['name']} (x${item['quantity']})")), 
                       SizedBox(height: 10),
-                      Text("Total Quantity: $totalQuantity"), // Display total quantity
-                      Text("Total Price: \ETB ${totalPrice.toStringAsFixed(2)}"), // Display total price
+                      Text("Total Quantity: $totalQuantity"), 
+                      Text("Total Price: \ETB ${totalPrice.toStringAsFixed(2)}"), 
                     ],
                   ),
                 ),
@@ -58,7 +58,7 @@ class OrderHistoryPage extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: CustomBottomNavBar(context: context),
+      bottomNavigationBar: CustomBottomNavBar(context: context,),
     );
   }
 }

@@ -20,24 +20,24 @@ class _PaymentPageState extends State<PaymentPage> {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
-  final double shippingPrice = 300.00; // Updated shipping fee
+  final double shippingPrice = 300.00; 
 
   double get subtotal =>
-      widget.totalPrice; // Subtotal is the price of the items
-  double get total => subtotal + shippingPrice; // Total is subtotal + shipping
+      widget.totalPrice; 
+  double get total => subtotal + shippingPrice; 
   void _completePurchase() async {
     if (fullNameController.text.isEmpty ||
         addressController.text.isEmpty ||
         phoneController.text.isEmpty ||
         selectedPaymentMethod == null) {
-      // Show a warning if any field is empty
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content: Text(
                 'Please fill in all fields before completing the purchase.')),
       );
     } else {
-      // Create order data
+      
       final orderData = {
         'userId': FirebaseAuth.instance.currentUser?.uid,
         'fullName': fullNameController.text,
@@ -53,9 +53,9 @@ class _PaymentPageState extends State<PaymentPage> {
         // Save the order to Firestore
         await FirebaseFirestore.instance.collection('orders').add(orderData);
 
-        _showThankYouDialog(); // Show Thank You dialog when form is valid
+        _showThankYouDialog();
 
-        // Optionally, clear the cart or navigate to a confirmation page
+       
       } catch (e) {
         // Handle errors
         ScaffoldMessenger.of(context).showSnackBar(
@@ -76,7 +76,7 @@ class _PaymentPageState extends State<PaymentPage> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
               },
               child: Text('OK'),
             ),
@@ -94,23 +94,23 @@ class _PaymentPageState extends State<PaymentPage> {
         backgroundColor: Color(0xFFD3D3D3),
       ),
       body: SingleChildScrollView(
-        // Wrap the body with SingleChildScrollView
+        
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Subtotal: \ETB ${subtotal.toStringAsFixed(2)}', // Show the subtotal
+              'Subtotal: \ETB ${subtotal.toStringAsFixed(2)}', 
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
             Text(
-              'Shipping Fee: \ETB ${shippingPrice.toStringAsFixed(2)}', // Show shipping fee
+              'Shipping Fee: \ETB ${shippingPrice.toStringAsFixed(2)}', 
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
             Text(
-              'Total: \ETB ${total.toStringAsFixed(2)}', // Show the total price (items + shipping)
+              'Total: \ETB ${total.toStringAsFixed(2)}', 
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
@@ -148,7 +148,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   child: Text('Bank Transfer'),
                 ),
                 DropdownMenuItem(
-                  value: 'Telebirr', // Added Telebirr option
+                  value: 'Telebirr', 
                   child: Text('Telebirr'),
                 ),
               ],

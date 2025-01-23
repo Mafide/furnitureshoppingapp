@@ -4,7 +4,7 @@ import 'auth_service.dart';
 import 'custom_bottom_navbar.dart';
 import 'SettingsPage.dart';
 import 'orderHistoryPage.dart';
-
+import 'user_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -16,11 +16,12 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String fullName = "";
   String email = "";
-  String phone = "0934567890";
+  String phone = "";
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -42,16 +43,83 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  void _updateProfile() {
-    setState(() {
-      fullName = _nameController.text;
-      email = _emailController.text;
-      phone = _phoneController.text;
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Profile saved successfully!')),
+  Future<void> _updateProfile() async {
+    final authService = Provider.of<AuthService>(context, listen: false);
+
+    try {
+      final updatedName = _nameController.text.trim();
+      final updatedEmail = _emailController.text.trim();
+      final updatedPhone = _phoneController.text.trim();
+      final updatedPassword = _passwordController.text.trim();
+
+      await authService.updateUserProfile(
+        fullName: updatedName,
+        email: updatedEmail,
+        phone: updatedPhone,
+        password: updatedPassword.isNotEmpty ? updatedPassword : null,
+        context: context,
+      );
+
+      setState(() {
+        fullName = updatedName;
+        email = updatedEmail;
+        phone = updatedPhone;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Profile updated successfully!')),
+      );
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error updating profile: ${e.toString()}')),
+      );
+    }
+  }
+
+  void _showEditProfileDialog() {
+    _nameController.text = fullName;
+    _emailController.text = email;
+    _phoneController.text = phone;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Edit Profile"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(labelText: "Full Name"),
+            ),
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: "Email"),
+            ),
+            TextField(
+              controller: _phoneController,
+              decoration: InputDecoration(labelText: "Phone Number"),
+            ),
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(labelText: "New Password (Optional)"),
+              obscureText: true,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: _updateProfile,
+            child: Text("Save"),
+          ),
+        ],
+      ),
     );
-    Navigator.pop(context);
   }
 
   void _showLogoutDialog() {
@@ -72,6 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.pushReplacementNamed(context, '/loginSignup');
             },
             child: Text('Logout'),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
           ),
         ],
       ),
@@ -100,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             },
             child: Text('Delete'),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
           ),
         ],
       ),
@@ -154,7 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             ListTile(
               leading: Icon(Icons.history),
-              title: Text("Order History"), // Add Order History option
+              title: Text("Order History"),
               onTap: () {
                 Navigator.push(
                   context,
@@ -176,46 +245,6 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
       bottomNavigationBar: CustomBottomNavBar(context: context),
-    );
-  }
-
-  void _showEditProfileDialog() {
-    _nameController.text = fullName;
-    _emailController.text = email;
-    _phoneController.text = phone;
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Edit Profile"),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: "Full Name"),
-            ),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: "Email"),
-            ),
-            TextField(
-              controller: _phoneController,
-              decoration: InputDecoration(labelText: "Phone Number"),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("Cancel"),
-          ),
-          ElevatedButton(
-            onPressed: _updateProfile,
-            child: Text("Save"),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -5,7 +5,7 @@ import 'product_details.dart';
 import 'ReviewPage.dart';
 import 'home_page.dart';
 import 'profilepage.dart';
-import 'auth_service.dart'; // Import the AuthService
+import 'auth_service.dart'; 
 
 class WishlistPage extends StatefulWidget {
   const WishlistPage({super.key});
@@ -15,17 +15,17 @@ class WishlistPage extends StatefulWidget {
 }
 
 class _WishlistPageState extends State<WishlistPage> {
-  final AuthService authService = AuthService(); // Initialize AuthService
+  final AuthService authService = AuthService(); 
   List<Map<String, dynamic>> wishlist = [];
 
   @override
   void initState() {
     super.initState();
-    // Fetch the wishlist from Firestore when the page loads
+    
     _loadWishlist();
   }
 
-  // Load wishlist from Firestore
+  
   Future<void> _loadWishlist() async {
     try {
       List<Map<String, dynamic>> fetchedWishlist =
@@ -82,12 +82,12 @@ class _WishlistPageState extends State<WishlistPage> {
                   trailing: IconButton(
                     icon: const Icon(Icons.delete, color: Colors.red),
                     onPressed: () {
-                      // Remove item from wishlist
+                      
                       _removeFromWishlist(index);
                     },
                   ),
                   onTap: () {
-                    // Navigate to product details page on tap
+                    
                     Navigator.push(
                       context,
                       MaterialPageRoute(

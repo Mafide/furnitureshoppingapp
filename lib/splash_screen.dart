@@ -16,11 +16,11 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         color: Color.fromRGBO(200, 200, 200, 0.64),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,  // Aligning to top
+          mainAxisAlignment: MainAxisAlignment.start,  
           children: [
-            // Padding before Elegant Simple Furnitures text
+            
             Padding(
-              padding: const EdgeInsets.only(top: 71.0, left: 20.0, right: 20.0), // Added padding before the title and left alignment
+              padding: const EdgeInsets.only(top: 71.0, left: 20.0, right: 20.0), 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,  
                 children: [
@@ -42,13 +42,13 @@ class _SplashScreenState extends State<SplashScreen> {
             Center(
               child: Image.asset(
                 'assets/clipped.jpg',
-                height: 310, // Increase image size
+                height: 310, 
               ),
             ),
             
-            SizedBox(height: 30), // Increased space between the image and the next text
+            SizedBox(height: 30), 
 
-            // Affordable home furniture designs & ideas text last
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
@@ -60,14 +60,14 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             
-            Spacer(), // Spacer to push buttons to the bottom
+            Spacer(), 
             
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Sign Up Button
+                  
                   Container(
                     width: 150,
                     decoration: BoxDecoration(

@@ -3,7 +3,7 @@ import 'package:furnituree/AddToCartPage.dart';
 import 'package:furnituree/home_page.dart';
 import 'package:furnituree/profilepage.dart';
 import 'custom_bottom_navbar.dart';
-import 'wishlistpage.dart';
+
 
 class ReviewPage extends StatefulWidget {
   final Map<String, dynamic> product;
@@ -244,7 +244,7 @@ class _ReviewPageState extends State<ReviewPage> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 300, // Fixed height for the review list area
+                    height: 300, 
                     child: ListView.builder(
                       itemCount: _reviews.length,
                       itemBuilder: (context, index) {
@@ -278,7 +278,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                       icon: Icon(Icons.comment),
                                       onPressed: () => _viewComments(index),
                                     ),
-                                    // Add a delete icon if the review was posted by the current user
+                                    
                                     if (review['profileImage'] == 'assets/accent.jpg')
                                       IconButton(
                                         icon: Icon(Icons.delete, color: Colors.red),
@@ -309,7 +309,9 @@ class _ReviewPageState extends State<ReviewPage> {
 
   void _selectImage() async {
     setState(() {
-      _imagePath = 'assets/accent.jpg'; // Default image path
+      _imagePath = 'assets/accent.jpg';
+      _imagePath = 'assets/velvet.jpg';
+      _imagePath = 'assets/corner.jpg';
     });
   }
 }

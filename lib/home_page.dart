@@ -10,7 +10,6 @@ import 'product_details.dart';
 import 'profilepage.dart';
 import 'theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'wishlistpage.dart';
 import 'showcasepage.dart';
 import 'user_provider.dart';
 
@@ -155,7 +154,6 @@ class _HomePageState extends State<HomePage> {
         'description': 'Spacious wooden wardrobe.',
         'price': '5000.0',
       },
-      
       {
         'name': 'Cupboard Shelves',
         'image': 'cupboard.jpg',
@@ -288,12 +286,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Color(0xFFD3D3D3), // Light gray background color
-        elevation: 0, // Remove shadow
+        backgroundColor: Color(0xFFD3D3D3), 
+        elevation: 0, 
         title: Text(
           "Furnitures",
           style: TextStyle(
-            color: Colors.black, // Explicitly set text color to black
+            color: Colors.black, 
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
@@ -302,7 +300,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(
               Icons.notifications,
-              color: Colors.black, // Explicitly set icon color to black
+              color: Colors.black, 
             ),
             onPressed: () {
               Navigator.push(
@@ -314,11 +312,11 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(
               themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
-              color: Colors.black, // Explicitly set icon color to black
+              color: Colors.black, 
             ),
             onPressed: () {
               themeProvider.toggleTheme(
-                themeProvider.isDarkMode ? false : true, // Toggle theme
+                themeProvider.isDarkMode ? false : true, 
               );
             },
           ),
@@ -333,7 +331,7 @@ class _HomePageState extends State<HomePage> {
               backgroundImage: AssetImage('assets/profile.jpg'),
             ),
           ),
-          SizedBox(width: 16), // Add spacing
+          SizedBox(width: 16), 
         ],
       ),
       drawer: Drawer(
@@ -347,12 +345,12 @@ class _HomePageState extends State<HomePage> {
               accountName: Text(
                 username,
                 style: TextStyle(
-                    color: Colors.black), // Set username text color to black
+                    color: Colors.black), 
               ),
               accountEmail: Text(
                 email,
                 style: TextStyle(
-                    color: Colors.black), // Set email text color to black
+                    color: Colors.black), 
               ),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/profile.jpg'),
@@ -438,16 +436,16 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20),
-              // Greeting text before search box
+              
               Text(
-                "Hi $username, stylish furniture awaits!",
+                "Hi ${userProvider.username}, stylish furniture awaits!",
                 style: TextStyle(
-                  fontSize: 20, // Adjust the font size for the greeting text
+                  fontSize: 20, 
                   fontWeight: FontWeight.w600,
                   color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
               ),
-              SizedBox(height: 20), // Space between greeting and search box
+              SizedBox(height: 20), 
               // Search box
               TextField(
                 onChanged: (value) {
@@ -465,7 +463,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20),
 
-              // Horizontally scrollable showroom images
+              
               SizedBox(
                 height: 200,
                 child: SingleChildScrollView(
@@ -542,7 +540,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 20),
-              // Horizontally scrollable category selection
+              
               SizedBox(
                 height: 40,
                 child: ListView(
@@ -583,10 +581,10 @@ class _HomePageState extends State<HomePage> {
                   childAspectRatio: 0.7,
                 ),
                 itemCount: filteredItems.length,
-                // itemCount: furnitureItems.length,
+               
                 itemBuilder: (context, index) {
-                  // final item = furnitureItems[index];
-                   final item = filteredItems[index];
+                 
+                  final item = filteredItems[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -594,13 +592,13 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(
                           builder: (context) => ProductDetailsPage(
                             name: item['name'] ??
-                                'Default Name', // Provide a default value if null
+                                'Default Name', 
                             image: item['image'] ??
-                                'default_image.png', // Provide a default image if null
+                                'default_image.png', 
                             description: item['description'] ??
-                                'No description available', // Provide a default description
+                                'No description available', 
                             price: item['price']?.toString() ?? '0.0',
-                            product: {}, // Convert to string and provide a default price if null
+                            product: {}, 
                           ),
                         ),
                       );

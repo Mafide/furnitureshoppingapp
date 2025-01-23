@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'auth_service.dart';
 import 'custom_bottom_navbar.dart';
-import 'checkout.dart'; // Import the Checkout page
+import 'checkout.dart'; 
 
 
 class AddToCartPage extends StatefulWidget {
@@ -12,6 +12,8 @@ class AddToCartPage extends StatefulWidget {
 }
 
 class _AddToCartPageState extends State<AddToCartPage> {
+   int _selectedIndex = 1;
+   
   final AuthService _authService = AuthService();
   List<Map<String, dynamic>> cartItems = [];
 
@@ -21,7 +23,7 @@ class _AddToCartPageState extends State<AddToCartPage> {
     _loadCartItems();
   }
 
-  // Function to load cart items from Firebase
+  
   Future<void> _loadCartItems() async {
     try {
       final items = await _authService.getCart();
@@ -33,13 +35,13 @@ class _AddToCartPageState extends State<AddToCartPage> {
     }
   }
 
-  // Total price calculation
+  
   double get totalPrice => cartItems.fold(0.0, (sum, item) {
         return sum +
             ((item['price'] as num).toDouble() * (item['quantity'] as int));
       });
 
-  // Increase quantity of product in cart
+  
   void _increaseQuantity(int index) {
     setState(() {
       cartItems[index]['quantity']++;
@@ -47,31 +49,31 @@ class _AddToCartPageState extends State<AddToCartPage> {
     _authService.addToCart(cartItems[index]); // Update cart quantity in Firebase
   }
 
-  // Decrease quantity of product in cart
+  
   void _decreaseQuantity(int index) {
     if (cartItems[index]['quantity'] > 1) {
       setState(() {
         cartItems[index]['quantity']--;
       });
-      _authService.addToCart(cartItems[index]); // Update cart quantity in Firebase
+      _authService.addToCart(cartItems[index]); 
     }
   }
 
-  // Delete item from cart
+  
   void _deleteItem(int index) async {
     final item = cartItems[index];
-    // Debugging: Check the item that is being deleted
+    
     print('Deleting item: ${item['id']} - ${item['name']}');
 
-    // Remove item from Firebase first
+    
     await _authService.removeFromCart(item);
 
-    // Then, remove the item from the local cart list
+    
     setState(() {
       cartItems.removeAt(index);
     });
 
-    // Debugging: Verify the cart list after deletion
+    
     print('Cart after deletion: $cartItems');
   }
 
@@ -105,7 +107,7 @@ class _AddToCartPageState extends State<AddToCartPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              // Item image
+                              
                               Image.asset(
                                 'assets/${item['image']}',
                                 width: 60,
@@ -135,15 +137,15 @@ class _AddToCartPageState extends State<AddToCartPage> {
                                       const SizedBox(height: 5),
                                       Row(
                                         children: [
-                                          // Decrease button
+                                          
                                           IconButton(
                                             icon: const Icon(Icons.remove),
                                             onPressed: () =>
                                                 _decreaseQuantity(index),
                                           ),
-                                          // Quantity display
+                                          
                                           Text('${item['quantity']}'),
-                                          // Increase button
+                                          
                                           IconButton(
                                             icon: const Icon(Icons.add),
                                             onPressed: () =>
@@ -180,7 +182,7 @@ class _AddToCartPageState extends State<AddToCartPage> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          // Navigate to Checkout page with the total price and cart items
+                          
                           Navigator.push(
                             context,
                             MaterialPageRoute(

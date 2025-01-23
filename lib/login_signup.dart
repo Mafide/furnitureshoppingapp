@@ -17,7 +17,7 @@ class LoginSignupPage extends StatelessWidget {
   if (_loginFormKey.currentState?.validate() ?? false) {
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
-      // Sign in the user
+      
       await authService.signIn(
         _loginEmailController.text.trim(),
         _loginPasswordController.text,
@@ -26,15 +26,15 @@ class LoginSignupPage extends StatelessWidget {
       final currentUser = authService.currentUser;
       final userProfile = await authService.getUserProfile(currentUser!.uid);
 
-      // Debugging: Log the user profile data
+      
       print('Retrieved User Profile: $userProfile');
 
       if (userProfile != null) {
-        // Ensure that userProfile is a Map and contains the necessary data
+        
         final username = userProfile['username'] ?? currentUser.displayName ?? '';
         final email = currentUser.email ?? '';
 
-        // Update the provider with the user's username and email after login
+        
         Provider.of<UserProvider>(context, listen: false).setUser(username, email);
 
         Navigator.pushReplacement(
@@ -47,7 +47,7 @@ class LoginSignupPage extends StatelessWidget {
         throw Exception('User profile not found');
       }
     } catch (e) {
-      // Show the error message if login fails
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Login Failed: ${e.toString()}')),
       );

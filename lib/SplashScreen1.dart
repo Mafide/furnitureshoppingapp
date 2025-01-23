@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'splash_screen.dart'; // Import the SplashScreen class
+import 'splash_screen.dart'; 
 
 class SplashScreen1 extends StatefulWidget {
   const SplashScreen1({super.key});
@@ -14,7 +14,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
   void initState() {
     super.initState();
 
-    // Navigate to SplashScreen after a 3-second delay
+    
     Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => SplashScreen()),
@@ -26,21 +26,21 @@ class _SplashScreen1State extends State<SplashScreen1> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color.fromRGBO(200, 200, 200, 0.64), // Set the background color
+        color: Color.fromRGBO(200, 200, 200, 0.64), 
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.chair,
-                size: 120, // Increased the icon size
+                size: 120, 
                 color: Colors.black,
               ),
               SizedBox(height: 20),
               Text(
                 'FURNITURE',
                 style: TextStyle(
-                  fontSize: 36, // Increased font size
+                  fontSize: 36, 
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -49,14 +49,14 @@ class _SplashScreen1State extends State<SplashScreen1> {
               Text(
                 'BEST QUALITY',
                 style: TextStyle(
-                  fontSize: 24, // Increased font size
+                  fontSize: 24, 
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 30), // Space before the loading indicator
+              SizedBox(height: 30), 
               CircularProgressIndicator(
                 color: Colors.black,
-                strokeWidth: 2.0, // Adjust thickness of the indicator
+                strokeWidth: 2.0, 
               ),
             ],
           ),

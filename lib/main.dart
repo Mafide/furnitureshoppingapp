@@ -33,15 +33,15 @@ class FurnitureApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.teal,
               appBarTheme: const AppBarTheme(
-                backgroundColor: Color(0xFFD3D3D3), // Light mode app bar background
-                foregroundColor: Colors.black,     // Ensure text/icons are black
+                backgroundColor: Color(0xFFD3D3D3), 
+                foregroundColor: Colors.black,     
                 titleTextStyle: TextStyle(
-                  color: Colors.black,             // Explicitly set title text color
+                  color: Colors.black,             
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
                 iconTheme: IconThemeData(
-                  color: Colors.black,             // Icon color for light mode
+                  color: Colors.black,             
                 ),
               ),
             ),
@@ -49,20 +49,20 @@ class FurnitureApp extends StatelessWidget {
               brightness: Brightness.dark,
               primarySwatch: Colors.teal,
               appBarTheme: const AppBarTheme(
-                backgroundColor: Color(0xFF212121), // Dark mode app bar background
-                foregroundColor: Colors.white,     // Default white text color
+                backgroundColor: Color(0xFF212121), 
+                foregroundColor: Colors.white,     
                 titleTextStyle: TextStyle(
-                  color: Colors.white,             // White title text for dark mode
+                  color: Colors.white,             
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
                 iconTheme: IconThemeData(
-                  color: Colors.white,             // Icon color for dark mode
+                  color: Colors.white,             
                 ),
               ),
             ),
             themeMode: themeProvider.themeMode,
-            home: const AuthWrapper(), // Use an AuthWrapper to manage user state
+            home: const AuthWrapper(), 
             routes: {
               '/settings': (context) => const SettingsPage(),
               '/loginSignup': (context) => LoginSignupPage(),
@@ -88,15 +88,15 @@ class AuthWrapper extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasData) {
-          // Set user data when logged in
+          
           final user = snapshot.data;
           if (user != null) {
             Provider.of<UserProvider>(context, listen: false)
                 .setUser(user.displayName ?? '', user.email ?? '');
-            return const SplashScreen1(); // Navigate to SplashScreen1
+            return const SplashScreen1(); 
           }
         }
-        return LoginSignupPage(); // Navigate to LoginSignupPage if not logged in
+        return LoginSignupPage(); 
       },
     );
   }

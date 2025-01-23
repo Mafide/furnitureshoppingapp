@@ -73,7 +73,7 @@ class ProductDetailsPage extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const SizedBox(width: 8), // Star Ratings
+                const SizedBox(width: 8), 
                 Row(
                   children: List.generate(5, (index) {
                     return const Icon(
@@ -87,49 +87,49 @@ class ProductDetailsPage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            // Product Price
+            
             Text(
               "\ETB $price",
               style: const TextStyle(fontSize: 20, color: Colors.green),
             ),
             const SizedBox(height: 8),
 
-            // Product Description
+            
             Text(
               description,
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 8),
 
-            // Additional Details (dynamic description)
+            
             Text(
               additionalDescription,
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
             const SizedBox(height: 16),
 
-            // Add to Cart Button
+            
             ElevatedButton(
               onPressed: () async {
                 // Create a product map
                 Map<String, dynamic> product = {
                   'name': name,
                   'image': image,
-                  'price': double.tryParse(price) ?? 0.0, // Ensure price is a double
+                  'price': double.tryParse(price) ?? 0.0, 
                   'description': description,
-                  'quantity': 1, // Default quantity
+                  'quantity': 1, 
                 };
 
                 try {
-                  // Add the product to Firestore cart
+                  
                   await authService.addToCart(product);
 
-                  // Show a success message
+                  
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('$name added to Cart')),
                   );
 
-                  // Navigate to the AddToCartPage
+                  
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -155,10 +155,10 @@ class ProductDetailsPage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            // Save to Wishlist Button
+            
             ElevatedButton(
               onPressed: () async {
-                // Create a product map for wishlist
+               
                 Map<String, dynamic> wishlistItem = {
                   'name': name,
                   'image': image,
@@ -167,15 +167,15 @@ class ProductDetailsPage extends StatelessWidget {
                 };
 
                 try {
-                  // Add the product to Firestore wishlist
+                  
                   await authService.addToWishlist(wishlistItem);
 
-                  // Show a success message
+                  
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('$name added to Wishlist')),
                   );
 
-                  // Optionally, navigate to the wishlist page
+                  
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => WishlistPage()),
