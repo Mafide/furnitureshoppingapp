@@ -13,7 +13,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   bool notificationsEnabled = true;
-  String selectedLanguage = "English";
+  
 
   void _showLogoutDialog() {
     showDialog(
@@ -38,53 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  void _showLanguagePicker() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Select Language"),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RadioListTile(
-              title: Text("English"),
-              value: "English",
-              groupValue: selectedLanguage,
-              onChanged: (value) {
-                setState(() {
-                  selectedLanguage = value!;
-                });
-                Navigator.pop(context);
-              },
-            ),
-            RadioListTile(
-              title: Text("Amharic"),
-              value: "Amharic",
-              groupValue: selectedLanguage,
-              onChanged: (value) {
-                setState(() {
-                  selectedLanguage = value!;
-                });
-                Navigator.pop(context);
-              },
-            ),
-            RadioListTile(
-              title: Text("French"),
-              value: "French",
-              groupValue: selectedLanguage,
-              onChanged: (value) {
-                setState(() {
-                  selectedLanguage = value!;
-                });
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -105,13 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
           ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.language),
-            title: Text("Language"),
-            subtitle: Text(selectedLanguage),
-            onTap: _showLanguagePicker,
-          ),
+          
           Divider(),
           ListTile(
             leading: Icon(Icons.notifications),
