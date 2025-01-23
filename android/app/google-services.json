@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "56815295830",
+    "project_id": "flutter-furniture-90ba8",
+    "storage_bucket": "flutter-furniture-90ba8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56815295830:android:c91bfaa8b5434ffa7b0af7",
+        "android_client_info": {
+          "package_name": "com.example.furnituree"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGad42_7vNa8iKmpwQOJAv5nPPRzMNFbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
